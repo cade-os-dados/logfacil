@@ -3,7 +3,7 @@
 ## Instalation
 
 ```bash
-$ pip install git+https://github.com/cade-os-dados/logfacil
+pip install git+https://github.com/cade-os-dados/logfacil
 ```
 
 ## Setup
