@@ -1,5 +1,11 @@
 # Usage
 
+## Instalation
+
+```bash
+$ pip install git+https://github.com/cade-os-dados/logfacil
+```
+
 ## Setup
 
 Para iniciar o logging das suas funções, basta chamar a função setup.init(). Isto irá criar um diretório <b>logs</b> no diretório atual. <br>
