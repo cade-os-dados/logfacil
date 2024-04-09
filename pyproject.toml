@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "logfacil"
-version = "0.1.0"
+version = "0.1.1"
 description = "Configuração rápida para logs de chamadas de funções python"
 authors = ["Rafael Felipe da Silva <rafaelfelipesiilva@gmail.com>"]
 readme = "README.md"
