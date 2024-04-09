@@ -23,12 +23,21 @@ def init(path: str = '', dir: str = './logs'):
     # join dir and path
     log_path = os.path.join(dir,path)
 
+    # salvar os handlers
+    handlers = [
+        logging.FileHandler(log_path) # Log to a file
+        #logging.StreamHandler()  # Log to the console
+    ]
+
     # config log
     logging.basicConfig(
         level=logging.INFO,  # Set the desired log level (INFO, DEBUG, WARNING, ERROR, CRITICAL)
         format='%(asctime)s - %(levelname)s - %(message)s',
-        handlers=[
-            logging.FileHandler(log_path),  # Log to a file
-            #logging.StreamHandler()  # Log to the console
-        ]
+        handlers=handlers
     )
+
+    return handlers
+
+def close_all(handlers):
+    for handler in handlers:
+        handler.close()
