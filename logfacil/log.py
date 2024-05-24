@@ -28,15 +28,15 @@ class Controller:
         names = dir(obj)
         attrs = map(lambda x: getattr(obj, x), names)
         methods = dict(filter(self.__is_public_method__, zip(names, attrs)))
-        self.cache.update({obj: methods})
+        self.cache.update({id(obj): methods})
     
     def __cache_methods__(self, obj):
-        if obj not in self.cache:
+        if id(obj) not in self.cache:
             self.__list_methods__(obj)
-        return self.cache[obj]
+        return self.cache[id(obj)]
     
     def ignore(self, obj, name):
-        methods = self.cache.get(obj)
+        methods = self.cache.get(id(obj))
         if methods is not None and methods.get(name) is not None:
             setattr(obj, name, methods[name])
             methods.pop(name)

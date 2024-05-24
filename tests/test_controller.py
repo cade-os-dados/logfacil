@@ -26,7 +26,7 @@ class testeController(unittest.TestCase):
         controler = Controller()
         foo = Foo()
         controler.__list_methods__(foo)
-        methods = controler.cache[foo]
+        methods = controler.cache[id(foo)]
         assert len(methods) == 2
         assert methods.get('metodo1') == foo.metodo1
         assert methods.get('metodo2') == foo.metodo2
@@ -35,12 +35,12 @@ class testeController(unittest.TestCase):
         controler = Controller()
         foo = Foo()
         controler.__list_methods__(foo)
-        methods = controler.cache.get(foo)
+        methods = controler.cache.get(id(foo))
         assert len(methods) == 2
         
         # ignoring metodo1
         controler.ignore(foo, 'metodo1')
-        methods = controler.cache.get(foo)
+        methods = controler.cache.get(id(foo))
         assert len(methods) == 1
         assert hasattr(foo.metodo1, '__wrapped__') == False
         assert methods.get('metodo2') == foo.metodo2
