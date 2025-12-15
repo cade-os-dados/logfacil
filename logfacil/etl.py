@@ -72,6 +72,7 @@ def log_etl_transform(func):
 
         valor = func(*args, **kwargs)
         log_return(valor,log)
+        return valor
     return wrapper
 
 def deactivate(func):
