@@ -2,10 +2,24 @@ import logging
 from types import MethodType
 from functools import wraps
 
+def _is_pandas_object(obj):
+    tipo = type(obj)
+    return tipo.__name__ in ('DataFrame', 'Series') and tipo.__module__.startswith('pandas')
+
 def activate(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
-        logging.info("Function: %s - Module: %s - Args: %s - Kwargs: %s", func.__name__, func.__module__, args, kwargs)
+        # Exemplo: filtrando ou formatando os args caso sejam do Pandas
+        args_formatados = [
+            f"<{type(arg).__name__} shape={arg.shape}>" if _is_pandas_object(arg) else arg
+            for arg in args
+        ]
+        kwargs_formatados = [
+            f"<{type(kwarg).__name__} shape={kwarg.shape}>" if _is_pandas_object(kwarg) else kwarg
+            for kwarg in kwargs
+        ]
+
+        logging.info("Function: %s - Module: %s - Args: %s - Kwargs: %s", func.__name__, func.__module__, args_formatados, kwargs_formatados)
         return func(*args, **kwargs)
     return wrapper
 
